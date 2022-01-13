@@ -1,7 +1,10 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity as TypeOrmBaseEntity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import Entity from './interfaces/entity.interface';
 
-class BaseEntity implements Entity {
+class BaseEntity extends TypeOrmBaseEntity implements Entity {
   @PrimaryGeneratedColumn()
   id: number;
 }
