@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  product-api-db-data: {}
+  product-api-test-db-data: {}
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - product-api-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: product-api
+  testdb:
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - product-api-test-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: product-api
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8090:8080"
