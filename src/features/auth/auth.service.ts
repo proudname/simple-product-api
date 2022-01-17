@@ -3,7 +3,8 @@ import UserCredentialsDto from '../../common/dto/user-credentials.dto';
 import { UserService } from '../user/user.service';
 import User from '../user/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from '../types';
+import { JwtPayload } from '../../types';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
   async validateUser(credentials: UserCredentialsDto): Promise<User | null> {
-    return this.userService.findByCredentials(credentials);
+    const user = await this.userService.getPasswordByEmail(credentials.email);
+    if (!user) return null;
+    const isPasswordCorrect = await bcrypt.compare(
+      credentials.password,
+      user.password,
+    );
+    if (!isPasswordCorrect) return null;
+    return user;
   }
 
   async login(user: User) {

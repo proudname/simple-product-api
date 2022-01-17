@@ -2,7 +2,7 @@ import {
   BaseEntity as TypeOrmBaseEntity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Entity from './interfaces/entity.interface';
+import Entity from './interfaces/entity';
 
 class BaseEntity extends TypeOrmBaseEntity implements Entity {
   @PrimaryGeneratedColumn()

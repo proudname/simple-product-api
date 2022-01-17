@@ -18,6 +18,7 @@ import { AuthGuard } from '@nestjs/passport';
     alwaysPaginate: true,
   },
   routes: {
+    getManyBase: {},
     getOneBase: {
       decorators: [UseInterceptors(CacheInterceptor), CacheTTL(60)],
     },
@@ -27,9 +28,12 @@ import { AuthGuard } from '@nestjs/passport';
     updateOneBase: {
       decorators: [UseGuards(AuthGuard('jwt'))],
     },
+    deleteOneBase: {
+      decorators: [UseGuards(AuthGuard('jwt'))],
+    },
   },
 })
-@Controller('product')
+@Controller('products')
 export class ProductController implements CrudController<Product> {
   constructor(public service: ProductService) {}
 }
