@@ -16,3 +16,7 @@ export type PaginationResult<T> = {
   pageCount: 1;
   total: 1;
 };
+
+export type JwtResultObject = {
+  access_token: string;
+};

@@ -54,8 +54,7 @@ describe('AppController (e2e)', () => {
 
     const userInfo = generateUserInfo();
     const user = await userService.createUser(userInfo);
-    const jwtResponse = await authService.login(user);
-    jwt = jwtResponse.access_token;
+    jwt = await authService.login(user);
     await app.init();
   });
 
@@ -88,7 +87,7 @@ describe('AppController (e2e)', () => {
       const response = await agent.post('/auth/login').send(userCredentials);
 
       expect(response.status).toBe(401);
-      expect(response.body).not.toHaveProperty('jwt');
+      expect(response.body).not.toHaveProperty('access_token');
     });
   });
 
@@ -140,48 +139,6 @@ describe('AppController (e2e)', () => {
           const product = res.body as Product;
           expect(product.name).toBe(updatedProductPayload.name);
         });
-    });
-  });
-
-  describe('/products/:id (PUT)', () => {
-    it('should get unauthorized error', async () => {
-      const productInfo = generateProductInfo();
-      const savedProduct = await productRepository.save(productInfo);
-      const newProductPayload = generateProductInfo();
-      return agent
-        .patch(`/products/${savedProduct.id}`)
-        .send(newProductPayload)
-        .expect(401);
-    });
-    it('should replace a product with a new one', async () => {
-      const productInfo = generateProductInfo();
-      const savedProduct = await productRepository.save(productInfo);
-      const newProductPayload = generateProductInfo();
-      return agent
-        .patch(`/products/${savedProduct.id}`)
-        .set('Authorization', `Bearer ${jwt}`)
-        .send(newProductPayload)
-        .expect(200)
-        .expect((res) => {
-          const product = res.body as Product;
-          expect(product.name).toBe(newProductPayload.name);
-        });
-    });
-  });
-
-  describe('/products/:id (DELETE)', () => {
-    it('should get unauthorized error', async () => {
-      const productInfo = generateProductInfo();
-      const savedProduct = await productRepository.save(productInfo);
-      return agent.delete(`/products/${savedProduct.id}`).expect(401);
-    });
-    it('should delete a product', async () => {
-      const productInfo = generateProductInfo();
-      const savedProduct = await productRepository.save(productInfo);
-      return agent
-        .delete(`/products/${savedProduct.id}`)
-        .set('Authorization', `Bearer ${jwt}`)
-        .expect(200);
     });
   });
 

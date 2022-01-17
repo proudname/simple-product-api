@@ -1,8 +1,13 @@
-import User from '../../features/user/entity/user.entity';
+import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 class UserCredentialsDto {
-  email: User['email'];
-  password: User['password'];
+  @ApiProperty()
+  @IsString()
+  readonly email: string;
+  @ApiProperty()
+  @IsString()
+  readonly password: string;
 }
 
 export default UserCredentialsDto;
