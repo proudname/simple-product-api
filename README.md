@@ -11,4 +11,4 @@
 ## Tests (e2e)
 
 1. Create .env.test file from .env.example and fill it with test data
-2. Run "yarn test:e2e"
+2. Run "yarn test:e2e" (or "npm run test:e2e")
