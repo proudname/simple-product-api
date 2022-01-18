@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRoot(),
     UserModule,
-    AuthModule,
+    AuthModule.register(),
     ProductModule,
   ],
 })

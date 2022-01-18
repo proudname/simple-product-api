@@ -20,3 +20,7 @@ export type PaginationResult<T> = {
 export type JwtResultObject = {
   access_token: string;
 };
+
+export type UserCredentials = {
+  email: string;
+};

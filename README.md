@@ -5,7 +5,8 @@
 1. Clone this repo
 2. Install dependencies via "yarn install" (or "npm install")
 3. Create .env file from .env.example and fill it
-4. Run "yarn start"
+4. Run migrations via "yarn typeorm migration:run" (or npm run typeorm migration:run)
+5. Run "yarn start"
 
 ## Tests (e2e)
 
