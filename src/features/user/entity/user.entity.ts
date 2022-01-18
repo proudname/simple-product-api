@@ -1,5 +1,5 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
-import BaseEntity from '../../../common/base.entity';
+import BaseEntity from '../../../common/base-entity';
 import { IsEmail } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import UserSchema from '../interfaces/user-schema';

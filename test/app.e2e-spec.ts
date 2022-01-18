@@ -54,7 +54,8 @@ describe('AppController (e2e)', () => {
 
     const userInfo = generateUserInfo();
     const user = await userService.createUser(userInfo);
-    jwt = await authService.login(user);
+    const tokenResponse = await authService.login(user);
+    jwt = tokenResponse.access_token;
     await app.init();
   });
 

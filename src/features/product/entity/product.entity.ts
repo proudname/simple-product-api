@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import BaseEntity from '../../../common/base.entity';
+import BaseEntity from '../../../common/base-entity';
 import ProductSchema from '../interfaces/product-schema';
 import { ApiProperty } from '@nestjs/swagger';
 
